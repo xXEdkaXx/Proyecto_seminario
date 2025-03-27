@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar rol</title>
+</head>
+<body>
+    <h1>Eliminar rol: <%= rol.Nombre_rol%></h1>
+    <form action="/deleteRol" method="post">
+        <label for="id">Codigo</label>
+        <input type="text" name="id" id="id" value="<%= rol.id %>" readonly>
+        <br><br>
+        <label for="Nombre_rol">Nombre</label>
+        <input type="text" name="Nombre_rol" id="Nombre_rol" value="<%= rol.Nombre_rol%>" readonly>
+        <br><br>
+        <button type="submit">Confirmar</button>
+        <button><a href="/rol">Volver</a></button>
+    </form>
+</body>
+</html>

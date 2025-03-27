@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor De Roles</title>
+</head>
+<body>
+    <h1>Gestor De Roles</h1>
+    <a href="/crearR">Crear Rol</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre del Rol</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% rol.forEach((dato)=>{ %>
+            <tr>
+                <td><%= dato.id %></td>
+                <td><%= dato.Nombre_rol %></td>
+                <td><a href="/verR/<%= dato.id %>">Ver</a></td>
+                <td><a href="/editarR/<%= dato.id %>">Editar</a></td>
+                <td><a href="/eliminarR/<%= dato.id %>">Eliminar</a></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <button>Volver</button>
+</body>
+</html>

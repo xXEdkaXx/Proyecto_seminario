@@ -8,7 +8,7 @@ exports.saveRol = (req, res) => {
         if (error) {
             console.log(error); // Manejo básico de errores
         } else {
-            res.redirect('/roles'); // Redirecciona tras una inserción exitosa
+            res.redirect('/rol'); // Redirecciona tras una inserción exitosa
         }
     });
 };
@@ -23,7 +23,7 @@ exports.editRol = (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/roles');
+            res.redirect('/rol');
         }
     });
 };
@@ -36,7 +36,7 @@ exports.deleteRol = (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/roles');
+            res.redirect('/rol');
         }
     });
 };
@@ -84,7 +84,7 @@ exports.deleteRol = (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/roles');
+            res.redirect('/rol');
         }
     });
 };
