@@ -1,20 +1,24 @@
-conexion = require ('../database/bdd');
+const conexion = require('../database/bdd');
+// ROL
 exports.saveRol = (req, res) => {
     const Nombre_rol = req.body.Nombre_rol;
 
+    // Inserta un nuevo cliente en la base de datos
     conexion.query('INSERT INTO rol SET ?', { Nombre_rol }, (error) => {
         if (error) {
-            console.log(error); 
+            console.log(error); // Manejo básico de errores
         } else {
-            res.redirect('/roles'); 
+            res.redirect('/roles'); // Redirecciona tras una inserción exitosa
         }
     });
 };
 
 exports.editRol = (req, res) => {
+    // Obtiene los valores del cuerpo de la solicitud
     const id = req.body.id;
     const Nombre_rol = req.body.Nombre_rol;
 
+    // Actualiza los datos de un cliente según su código
     conexion.query('UPDATE rol SET ? WHERE id = ?', [{ Nombre_rol }, id], (error) => {
         if (error) {
             console.log(error);
@@ -25,8 +29,9 @@ exports.editRol = (req, res) => {
 };
 
 exports.deleteRol = (req, res) => {
-    const id = req.body.id; 
+    const id = req.body.id; // Código del cliente a eliminar
 
+    // Elimina un cliente de la base de datos
     conexion.query('DELETE FROM rol WHERE id = ?', [id], (error) => {
         if (error) {
             console.log(error);
@@ -37,6 +42,7 @@ exports.deleteRol = (req, res) => {
 };
 
 
+// CLIENTE
 exports.saveCliente = (req, res) => {
     // Obtiene los valores enviados en el cuerpo de la solicitud
     const nombre = req.body.nombre;
