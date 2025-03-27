@@ -1,29 +1,39 @@
 CREATE DATABASE IF NOT EXISTS `proyecto`;
 USE `proyecto`;
 
-CREATE TABLE IF NOT EXISTS `bitacora_asignacion` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ID_Inventariado` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ID_Inventariado` (`ID_Inventariado`),
-  CONSTRAINT `bitacora_asignacion_ibfk_1` FOREIGN KEY (`ID_Inventariado`) REFERENCES `inventariado` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-CREATE TABLE IF NOT EXISTS `bitacora_reparacion` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `ID_Reparacion` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ID_Reparacion` (`ID_Reparacion`),
-  CONSTRAINT `bitacora_reparacion_ibfk_1` FOREIGN KEY (`ID_Reparacion`) REFERENCES `reparacion` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
 CREATE TABLE IF NOT EXISTS `cliente` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `telefono` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE IF NOT EXISTS `rol` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `Nombre_rol` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE IF NOT EXISTS `tecnico` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre_tecnico` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `telefono` int DEFAULT NULL,
+  `ID_Rol` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ID_Rol` (`ID_Rol`),
+  CONSTRAINT `tecnico_ibfk_1` FOREIGN KEY (`ID_Rol`) REFERENCES `rol` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `usuario` varchar(50) DEFAULT NULL,
+  `contrasenia` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -53,30 +63,18 @@ CREATE TABLE IF NOT EXISTS `reparacion` (
   CONSTRAINT `reparacion_ibfk_1` FOREIGN KEY (`ID_Inventariado`) REFERENCES `inventariado` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
-CREATE TABLE IF NOT EXISTS `rol` (
+CREATE TABLE IF NOT EXISTS `bitacora_asignacion` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Nombre_rol` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-CREATE TABLE IF NOT EXISTS `tecnico` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nombre_tecnico` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `telefono` int DEFAULT NULL,
-  `ID_Rol` int NOT NULL,
+  `ID_Inventariado` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ID_Rol` (`ID_Rol`),
-  CONSTRAINT `tecnico_ibfk_1` FOREIGN KEY (`ID_Rol`) REFERENCES `rol` (`id`) ON DELETE CASCADE
+  KEY `ID_Inventariado` (`ID_Inventariado`),
+  CONSTRAINT `bitacora_asignacion_ibfk_1` FOREIGN KEY (`ID_Inventariado`) REFERENCES `inventariado` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
-CREATE TABLE IF NOT EXISTS `usuario` (
+CREATE TABLE IF NOT EXISTS `bitacora_reparacion` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `usuario` varchar(50) DEFAULT NULL,
-  `contrasenia` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `ID_Reparacion` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ID_Reparacion` (`ID_Reparacion`),
+  CONSTRAINT `bitacora_reparacion_ibfk_1` FOREIGN KEY (`ID_Reparacion`) REFERENCES `reparacion` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
