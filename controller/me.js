@@ -1,4 +1,4 @@
-const conexion = require('../database/db'); 
+conexion = require ('../database/bdd');
 exports.saveRol = (req, res) => {
     const Nombre_rol = req.body.Nombre_rol;
 
