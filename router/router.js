@@ -2,9 +2,13 @@ const express=require('express');
 const router = express.Router();
 const conexion=require('../database/bdd');
 const metodos=require('../controller/me');
+const e = require('express');
 module.exports = router; 
 //Espacio para que cada quien cree sus direcciones
-//Rol
+/* 
+EDUARDO ALVARADO
+INICIO ROL
+ */
 //Mostrar tabla de Roles en index roles
 router.get('/rol', (req,res) => {
     conexion.query('SELECT * FROM rol', (error, results) => {
@@ -63,5 +67,38 @@ router.get('/eliminarR/:id', (req,res) => {
             return;
         }
         res.render('rol/eliminar', {rol: resultado[0]});
+    });
+});
+/* 
+FIN ROl
+ */
+
+
+/* 
+EDUARDO ALVARADO
+INICIO TECNICO
+ */
+//Mostrar tabla tecnico
+router.get('/tecnico', (req,res) => {
+    conexion.query("SELECT tecnico.id, tecnico.nombre_tecnico, tecnico.email, tecnico.telefono, rol.Nombre_rol FROM tecnico JOIN rol ON tecnico.ID_Rol = rol.id", (error, resultado) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+        res.render('tecnico/index', {tecnico: resultado});
+    });
+});
+
+//Llamada del metodo Crear Tecnico
+router.post('/saveTecnico', metodos.saveTecnico);
+
+//Mostrar formulario de Crear Tecnico
+router.get('/crearT', (req,res) => {
+    conexion.query("SELECT * FROM rol", (error, resultado) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+        res.render('tecnico/crear', {rol: resultado});
     });
 });

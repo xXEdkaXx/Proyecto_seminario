@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor De Técnicos</title>
+</head>
+<body>
+    <h1>Gestor De Técnicos</h1>
+    <a href="/crearT">Agregar Técnico</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre del Técnico</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Rol</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% tecnico.forEach(function(dato) { %>
+            <tr>
+                <td><%= dato.id %></td>
+                <td><%= dato.nombre_tecnico %></td>
+                <td><%= dato.email %></td>
+                <td><%= dato.telefono %></td>
+                <td><%= dato.Nombre_rol %></td>
+                <td><a href="/verT/<%= dato.id %>">Ver</a></td>
+                <td><a href="/editarT/<%= dato.id %>">Editar</a></td>
+                <td><a href="/eliminarT/<%= dato.id %>">Eliminar</a></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <button>Volver</button>
+</body>
+</html>

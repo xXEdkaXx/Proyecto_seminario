@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Técnico</title>
+</head>
+<body>
+    <h1>Agregar Técnico</h1>
+    <form action="/saveTecnico" method="post">
+        <label for="nombre_tecnico">Nombre</label>
+        <input type="text" name="nombre_tecnico" id="nombre_tecnico" required>
+        <br><br>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" required>
+        <br><br>
+        <label for="telefono">Telefono</label>
+        <input type="text" name="telefono" id="telefono" required>
+        <br><br>
+        <label for="ID_Rol">Rol</label>
+        <select name="ID_Rol" required>
+            <option value="" selected disabled hidden>Selecciona una opción</option>
+            <% rol.forEach((dato) => { %>
+                <option value="<%= dato.id %>"><%= dato.Nombre_rol %></option>
+            <% }) %>
+        </select>
+        <br><br>
+        <button type="submit">Agregar Técnico</button>
+        <button onclick="window.location.href='/tecnico'">Volver</button>
+    </form>
+</body>
+</html>

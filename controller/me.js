@@ -103,7 +103,7 @@ exports.saveTecnico = (req, res) => {
         if (error) {
             console.log(error); // Manejo básico de errores
         } else {
-            res.redirect('/tecnicos'); // Redirecciona tras una inserción exitosa
+            res.redirect('/tecnico'); // Redirecciona tras una inserción exitosa
         }
     });
 };
@@ -121,7 +121,7 @@ exports.editTecnico = (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/tecnicos');
+            res.redirect('/tecnico');
         }
     });
 };
@@ -134,7 +134,7 @@ exports.deleteTecnico = (req, res) => {
         if (error) {
             console.log(error);
         } else {
-            res.redirect('/tecnicos');
+            res.redirect('/tecnico');
         }
     });
 };
