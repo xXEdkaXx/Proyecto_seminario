@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Técnico</title>
+</head>
+
+<body>
+    <h1>Ver Técnico</h1>
+    <form action="/deleteTecnico" method="post">
+        <label for="id">Codigo</label>
+        <input type="text" name="id" id="id" value="<%= tecnico.id %>" readonly>
+        <br><br>
+        <label for="nombre_tecnico">Nombre</label>
+        <input type="text" name="nombre_tecnico" id="nombre_tecnico" value="<%= tecnico.nombre_tecnico %>" readonly>
+        <br><br>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" value="<%= tecnico.email %>" readonly>
+        <br><br>
+        <label for="telefono">Telefono</label>
+        <input type="text" name="telefono" id="telefono" value="<%= tecnico.telefono %>" readonly>
+        <br><br>
+        <label for="ID_Rol">Rol</label>
+        <input type="text" name="ID_Rol" id="ID_Rol" value="<%= tecnico.ID_Rol %>" readonly>
+        <br><br>
+        <button type="submit">Eliminar</button>
+        <button onclick="window.location.href='/tecnico'">Volver</button>
+    </form>
+</body>
+
+</html>

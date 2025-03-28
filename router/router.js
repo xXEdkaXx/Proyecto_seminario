@@ -102,3 +102,59 @@ router.get('/crearT', (req,res) => {
         res.render('tecnico/crear', {rol: resultado});
     });
 });
+
+//Mostrar registro de tecnico
+router.get('/verT/:id', (req,res) => {
+    const codigo = req.params.id;
+    conexion.query('SELECT * FROM tecnico WHERE id = ?', [codigo], (error, resultado) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+        res.render('tecnico/ver', {tecnico: resultado[0]});
+    });
+});
+
+//Llamar metodo edit
+router.post('/editTecnico', metodos.editTecnico);
+
+//Mostrar formulario de editar
+router.get('/editarT/:id', (req,res) => {
+    const codigo = req.params.id;
+    conexion.query('SELECT * FROM tecnico WHERE id = ?', [codigo], (error, resultadoT) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+
+        conexion.query("SELECT * FROM rol", (error, resultadoR) => {
+            if(error){
+                console.log(error);
+                return;
+            }
+            res.render('tecnico/editar', {tecnico: resultadoT[0], rol: resultadoR});
+        });
+    });
+});
+
+//Llamar metodo eliminar
+router.post('/deleteTecnico', metodos.deleteTecnico);
+
+//Mostrar formulario eliminar
+router.get('/eliminarT/:id', (req,res) => {
+    const codigo = req.params.id;
+    conexion.query('SELECT * FROM tecnico WHERE id = ?', [codigo], (error, resultadoT) => {
+        if(error){
+            console.log(error);
+            return;
+        }
+
+        conexion.query("SELECT * FROM rol", (error, resultadoR) => {
+            if(error){
+                console.log(error);
+                return;
+            }
+            res.render('tecnico/eliminar', {tecnico: resultadoT[0], rol: resultadoR});
+        });
+    });
+});
