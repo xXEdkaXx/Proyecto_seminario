@@ -158,3 +158,6 @@ router.get('/eliminarT/:id', (req,res) => {
         });
     });
 });
+/* 
+FIN DE TECNICO
+*/
