@@ -7,8 +7,14 @@ module.exports = router;
 //Espacio para que cada quien cree sus direcciones
 /* 
 EDUARDO ALVARADO
-INICIO ROL
- */
+*/
+//INDEX GENERAL
+router.get('/home',(req,res)=> {
+    res.render('index');
+});
+
+
+//INICIO ROL
 //Mostrar tabla de Roles en index roles
 router.get('/rol', (req,res) => {
     conexion.query('SELECT * FROM rol', (error, results) => {
