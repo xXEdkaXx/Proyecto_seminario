@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nueva Reparación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .volver {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        form {
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .mensaje-error {
+            margin-bottom: 15px;
+            padding: 10px;
+            color: #721c1c;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/reparaciones" class="volver">Regresar</a>
+
+    <div>
+        <h1>Registrar Nueva Reparación</h1>
+
+        <% if (mensaje) { %>
+            <div class="mensaje-error">
+                <%= mensaje %>
+            </div>
+        <% } %>
+
+        <form action="/reparaciones/guardar" method="POST">
+            <label>Tipo:</label>
+            <input type="text" name="tipo" required><br>
+
+            <label>Estado:</label>
+            <select name="estado" required>
+                <option value="1">Completado</option>
+                <option value="2">En Proceso</option>
+                <option value="3">Pendiente</option>
+            </select><br>
+
+            <label>Fecha de Reparación:</label>
+            <input type="date" name="fecha_reparacion" required><br>
+
+            <label>ID del Inventariado:</label>
+            <input type="number" name="ID_Inventariado" required><br>
+
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+</body>
+</html>

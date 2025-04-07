@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Reparaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        td.oculto, th.oculto {
+            display: none;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 2px;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:last-of-type {
+            background-color: #e73c3c;
+        }
+
+        .mensaje-error {
+            margin-bottom: 15px;
+            padding: 10px;
+            color: #721c1c;
+            border-radius: 5px;
+        }
+    </style>    
+</head>
+<body>
+    <a href="/" class="volver">Regresar</a>
+    <h1>Lista de Reparaciones</h1>
+
+    <% if (mensaje) { %>
+        <div class="mensaje-error">
+            <%= mensaje %>
+        </div>
+    <% } %>
+
+    <a href="/reparaciones/nuevo">Nueva Reparación</a>
+
+    <div style="overflow-x: auto;">
+        <table>
+            <tr>
+                <th class="oculto">ID</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>ID Inventariado</th>
+                <th>Acciones</th>
+            </tr>
+            <% reparaciones.forEach(r => { %>
+                <tr>
+                    <td class="oculto"><%= r.id %></td>
+                    <td><%= r.tipo %></td>
+                    <td>
+                        <% if (r.estado === 1) { %>Completado<% } %>
+                        <% if (r.estado === 2) { %>En Proceso<% } %>
+                        <% if (r.estado === 3) { %>Pendiente<% } %>
+                    </td>
+                    <td><%= r.fecha_reparacion.toISOString().split('T')[0] %></td>
+                    <td><%= r.ID_Inventariado %></td>
+                    <td>
+                        <form action="/reparaciones/editar" method="POST" style="display:inline;">
+                            <input type="hidden" name="id" value="<%= r.id %>">
+                            <input type="text" name="tipo" value="<%= r.tipo %>" required>
+                            <select name="estado" required>
+                                <option value="1" <%= r.estado === 1 ? 'selected' : '' %>>Completado</option>
+                                <option value="2" <%= r.estado === 2 ? 'selected' : '' %>>En Proceso</option>
+                                <option value="3" <%= r.estado === 3 ? 'selected' : '' %>>Pendiente</option>
+                            </select>
+                            <input type="date" name="fecha_reparacion" value="<%= r.fecha_reparacion.toISOString().split('T')[0] %>" required>
+                            <input type="number" name="ID_Inventariado" value="<%= r.ID_Inventariado %>" required style="width: 50px;">
+                            <button type="submit">Actualizar</button>
+                        </form>
+                        <form action="/reparaciones/eliminar" method="POST" style="display:inline;">
+                            <input type="hidden" name="id" value="<%= r.id %>">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+</body>
+</html>

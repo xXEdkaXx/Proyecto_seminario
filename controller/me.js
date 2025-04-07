@@ -245,37 +245,58 @@ exports.deleteInventariado = (req, res) => {
 
 // REPARACION
 exports.saveReparacion = (req, res) => {
-    // Obtiene los valores enviados en el cuerpo de la solicitud
     const tipo = req.body.tipo;
     const estado = req.body.estado;
     const fecha_reparacion = req.body.fecha_reparacion;
     const ID_Inventariado = req.body.ID_Inventariado;
 
-    // Inserta un nuevo cliente en la base de datos
-    conexion.query('INSERT INTO reparacion SET ?', { tipo, estado, fecha_reparacion, ID_Inventariado }, (error) => {
+    conexion.query('SELECT id FROM inventariado WHERE id = ?', [ID_Inventariado], (error, results) => {
         if (error) {
-            console.log(error); // Manejo básico de errores
-        } else {
-            res.redirect('/reparaciones'); // Redirecciona tras una inserción exitosa
+            console.log('Error al validar inventariado:', error);
+            return res.render('reparaciones/nuevo', { mensaje: 'Error al validar el inventariado.' });
         }
+
+        if (results.length === 0) {
+            return res.render('reparaciones/nuevo', { mensaje: 'El ID de inventariado no existe.' });
+        }
+
+        conexion.query('INSERT INTO reparacion SET ?', { tipo, estado, fecha_reparacion, ID_Inventariado }, (error) => {
+            if (error) {
+                console.log('Error al guardar reparación:', error);
+                return res.render('reparaciones/nuevo', { mensaje: 'Error al guardar la reparación.' });
+            } else {
+                res.redirect('/reparaciones');
+            }
+        });
     });
 };
 
+
 exports.editReparacion = (req, res) => {
-    // Obtiene los valores del cuerpo de la solicitud
     const id = req.body.id;
     const tipo = req.body.tipo;
     const estado = req.body.estado;
     const fecha_reparacion = req.body.fecha_reparacion;
     const ID_Inventariado = req.body.ID_Inventariado;
 
-    // Actualiza los datos de un cliente según su código
-    conexion.query('UPDATE reparacion SET ? WHERE id = ?', [{ tipo, estado, fecha_reparacion, ID_Inventariado }, id], (error) => {
+    conexion.query('SELECT id FROM inventariado WHERE id = ?', [ID_Inventariado], (error, results) => {
         if (error) {
-            console.log(error);
-        } else {
-            res.redirect('/reparaciones');
+            console.log('Error al validar inventariado (editar):', error);
+            return res.redirect('/reparaciones?mensaje=Error en la validación del inventariado.');
         }
+
+        if (results.length === 0) {
+            return res.redirect('/reparaciones?mensaje=El ID de inventariado no existe. No se actualizó.');
+        }
+
+        conexion.query('UPDATE reparacion SET ? WHERE id = ?', [{ tipo, estado, fecha_reparacion, ID_Inventariado }, id], (error) => {
+            if (error) {
+                console.log('Error al actualizar reparación:', error);
+                return res.redirect('/reparaciones?mensaje=Error al actualizar la reparación.');
+            } else {
+                res.redirect('/reparaciones');
+            }
+        });
     });
 };
 
